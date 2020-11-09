@@ -23,6 +23,11 @@ class BankAccount:
         self.balance += amount 
         return self.balance
 
+
+class MinimumBalanceAccount(BankAccount):
+    """Pre-determined minimum balance."""
+    
+
 #TEST CASES
 
 a = BankAccount()
