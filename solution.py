@@ -11,7 +11,7 @@ class BankAccount:
 
         self.balance = 0
 
-    def withdrawal(self, amount):
+    def withdraw(self, amount):
         """Taking money out of my account."""
 
         self.balance -= amount
@@ -26,7 +26,23 @@ class BankAccount:
 
 class MinimumBalanceAccount(BankAccount):
     """Pre-determined minimum balance."""
-    
+
+    def __init__(self, minimum_balance):
+        """Initializing."""
+        BankAccount.__init__(self)
+        self.minimum_balance = minimum_balance
+
+    def withdraw(self, amount):
+        """Taking money out of my account."""
+
+        if self.balance - amount < self.minimum_balance:
+            print("Sorry minimum balance must be maintained.")
+        else:
+            BankAccount.withdraw(self, amount)
+            print("Successful withdrawal!")
+
+
+
 
 #TEST CASES
 
@@ -36,5 +52,15 @@ b = BankAccount()
 print(a.deposit(100))
 print(b.deposit(1000))
 
-print(a.withdrawal(30))
-print(b.withdrawal(250))
+print(a.withdraw(30))
+print(b.withdraw(250))
+
+a_account = MinimumBalanceAccount(30)
+b_account = MinimumBalanceAccount(50)
+
+print(a_account.deposit(1000))
+print(b_account.deposit(5))
+
+print(a_account.withdraw(30))
+print(b_account.withdraw(40))
+
